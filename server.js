@@ -1,11 +1,15 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const path = require('path');
 const connectDB = require('./config/db');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 const contactRoutes = require('./routes/contactRoutes');
 
-dotenv.config();
+delete process.env.MONGO_URI;
+const envPath = path.resolve(__dirname, '.env');
+dotenv.config({ path: envPath });
+console.log('Loaded .env from:', envPath);
 
 connectDB();
 
