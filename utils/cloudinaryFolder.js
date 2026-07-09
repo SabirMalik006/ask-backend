@@ -42,7 +42,7 @@ async function getProjectFolder(category, title, id) {
   const baseSlug = slugify(title);
   
   if (!id) {
-    return `work/${categorySlug}/${baseSlug}`;
+    return `ask-website/work/${categorySlug}/${baseSlug}`;
   }
 
   try {
@@ -59,11 +59,11 @@ async function getProjectFolder(category, title, id) {
       ? `${baseSlug}-${id.toString().slice(-6)}` 
       : baseSlug;
 
-    return `work/${categorySlug}/${projectSlug}`;
+    return `ask-website/work/${categorySlug}/${projectSlug}`;
   } catch (error) {
     console.error('Error checking slug collision in getProjectFolder:', error);
     // Fallback safely to appending suffix if DB query fails
-    return `work/${categorySlug}/${baseSlug}-${id.toString().slice(-6)}`;
+    return `ask-website/work/${categorySlug}/${baseSlug}-${id.toString().slice(-6)}`;
   }
 }
 

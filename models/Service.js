@@ -3,25 +3,22 @@ const mongoose = require('mongoose');
 const serviceSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   description: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
-  icon: {
-    type: String
+  tags: {
+    type: [String],
+    default: []
   },
-  tags: [{
-    type: String
-  }],
   order: {
     type: Number,
+    required: true,
     default: 0
-  },
-  isActive: {
-    type: Boolean,
-    default: true
   }
 }, {
   timestamps: true
