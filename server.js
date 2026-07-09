@@ -1,22 +1,21 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
 const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+console.log('Loaded .env from:', path.resolve(__dirname, '.env'));
+
+const express = require('express');
+const cors = require('cors');
 const connectDB = require('./config/db');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
-const contactRoutes = require('./routes/contactRoutes');
+// const contactRoutes = require('./routes/contactRoutes');
 const authRoutes = require('./routes/authRoutes');
-const projectRoutes = require('./routes/projectRoutes');
-const serviceRoutes = require('./routes/serviceRoutes');
-const faqRoutes = require('./routes/faqRoutes');
-const reviewRoutes = require('./routes/reviewRoutes');
-const careerRoutes = require('./routes/careerRoutes');
-const uploadRoutes = require('./routes/uploadRoutes');
-
-delete process.env.MONGO_URI;
-const envPath = path.resolve(__dirname, '.env');
-dotenv.config({ path: envPath });
-console.log('Loaded .env from:', envPath);
+// const projectRoutes = require('./routes/projectRoutes');
+const workRoutes = require('./routes/work');
+// const serviceRoutes = require('./routes/serviceRoutes');
+// const faqRoutes = require('./routes/faqRoutes');
+// const reviewRoutes = require('./routes/reviewRoutes');
+// const careerRoutes = require('./routes/careerRoutes');
+// const uploadRoutes = require('./routes/uploadRoutes');
 
 connectDB();
 
@@ -30,13 +29,14 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
-app.use('/api/contact', contactRoutes);
-app.use('/api/projects', projectRoutes);
-app.use('/api/services', serviceRoutes);
-app.use('/api/faqs', faqRoutes);
-app.use('/api/reviews', reviewRoutes);
-app.use('/api/careers', careerRoutes);
-app.use('/api/upload', uploadRoutes); // File uploads for admin
+// app.use('/api/contact', contactRoutes);
+// app.use('/api/projects', projectRoutes);
+app.use('/api/work', workRoutes);
+// app.use('/api/services', serviceRoutes);
+// app.use('/api/faqs', faqRoutes);
+// app.use('/api/reviews', reviewRoutes);
+// app.use('/api/careers', careerRoutes);
+// app.use('/api/upload', uploadRoutes); // File uploads for admin
 
 app.use(notFound);
 app.use(errorHandler);
