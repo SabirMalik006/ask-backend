@@ -1,7 +1,7 @@
 const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '.env') });
-console.log('Loaded .env from:', path.resolve(__dirname, '.env'));
+
 
 const express = require('express');
 const cors = require('cors');
@@ -64,7 +64,6 @@ const startServer = async () => {
   const PORT = await findAvailablePort(parseInt(process.env.PORT) || 4000);
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    console.log(`Admin dashboard: Open frontend/admin.html in your browser and use API base http://localhost:${PORT}/api`);
   });
 };
 
