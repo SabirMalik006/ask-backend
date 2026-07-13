@@ -8,22 +8,39 @@ const reviewSchema = new mongoose.Schema({
   company: {
     type: String
   },
-  avatar: {
-    type: String
-  },
   rating: {
     type: Number,
-    required: true,
     min: 1,
-    max: 5
+    max: 5,
+    required: true
   },
-  content: {
+  reviewText: {
     type: String,
     required: true
   },
-  isActive: {
+  photo: {
+    type: String
+  },
+  source: {
+    type: String,
+    enum: ['Admin', 'Public Submission'],
+    required: true
+  },
+  status: {
+    type: String,
+    enum: ['Pending', 'Approved', 'Rejected'],
+    default: 'Pending'
+  },
+  isFeatured: {
     type: Boolean,
-    default: true
+    default: false
+  },
+  submittedAt: {
+    type: Date,
+    default: Date.now
+  },
+  reviewedAt: {
+    type: Date
   }
 }, {
   timestamps: true

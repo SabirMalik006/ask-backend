@@ -17,8 +17,14 @@ const serviceRoutes = require('./routes/serviceRoutes');
 // const reviewRoutes = require('./routes/reviewRoutes');
 // const careerRoutes = require('./routes/careerRoutes');
 // const uploadRoutes = require('./routes/uploadRoutes');
+const jobRoutes = require('./routes/jobs');
+const applicationRoutes = require('./routes/applications');
+const reviewsRoutes = require('./routes/reviews');
+const googleReviewsRoutes = require('./routes/googleReviews');
+const { initScheduler } = require('./utils/scheduler');
 
 connectDB();
+initScheduler();
 
 const app = express();
 
@@ -36,9 +42,12 @@ app.use('/api/work', workRoutes);
 app.use('/api/team', teamRoutes);
 app.use('/api/services', serviceRoutes);
 // app.use('/api/faqs', faqRoutes);
-// app.use('/api/reviews', reviewRoutes);
+app.use('/api/reviews', reviewsRoutes);
+app.use('/api/google-reviews', googleReviewsRoutes);
 // app.use('/api/careers', careerRoutes);
 // app.use('/api/upload', uploadRoutes); // File uploads for admin
+app.use('/api/jobs', jobRoutes);
+app.use('/api/applications', applicationRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
